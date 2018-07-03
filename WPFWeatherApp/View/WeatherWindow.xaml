@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFWeatherApp.View"
         mc:Ignorable="d"
-        Title="WeatherWindow" Height="450" Width="800">
+        Title="WeatherWindow" Height="500" Width="300">
     <Grid>
-        
+        <StackPanel Margin="10">
+            <TextBox/>
+            <TextBlock Text="Paris"
+                       Margin="0 20 0 0"
+                       FontSize="20"
+                       FontWeight="Bold"/>
+            <TextBlock Text="21 C"
+                       Margin="0 30 0 0"
+                       FontSize="40"
+                       FontWeight="ExtraBold"/>
+            <TextBlock Text="Sunny"
+                       FontSize="15"
+                       FontWeight="Bold"/>
+            <TextBlock Text="UV"
+                       Margin="0 50 0 0"/>
+            <TextBlock Text="Prec"/>
+            <TextBlock Text="NE 9 Kmph"/>
+        </StackPanel>
     </Grid>
 </Window>
+

@@ -114,7 +114,6 @@ namespace WPFWeatherApp.Model
     {
 
         private Metric metric;
-
         public Metric Metric
         {
             get { return metric; }
@@ -126,7 +125,78 @@ namespace WPFWeatherApp.Model
         }
 
         private Imperial imperial;
+        public Imperial Imperial
+        {
+            get { return imperial; }
+            set
+            {
+                imperial = value;
+                OnPropertyChanged("Imperial");
+            }
+        }
 
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    public class RealFeelTemperature
+    {
+        private Metric metric;
+        public Metric Metric
+        {
+            get { return metric; }
+            set
+            {
+                metric = value;
+                OnPropertyChanged("Metric");
+            }
+        }
+
+        private Imperial imperial;
+        public Imperial Imperial
+        {
+            get { return imperial; }
+            set
+            {
+                imperial = value;
+                OnPropertyChanged("Imperial");
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    public class Precipitation
+    {
+        private Metric metric;
+        public Metric Metric
+        {
+            get { return metric; }
+            set
+            {
+                metric = value;
+                OnPropertyChanged("Metric");
+            }
+        }
+
+        private Imperial imperial;
         public Imperial Imperial
         {
             get { return imperial; }
@@ -153,7 +223,6 @@ namespace WPFWeatherApp.Model
     {
 
         private DateTime localObservationDateTime;
-
         public DateTime LocalObservationDateTime
         {
             get { return localObservationDateTime; }
@@ -165,7 +234,6 @@ namespace WPFWeatherApp.Model
         }
 
         private int epochTime;
-
         public int EpochTime
         {
             get { return epochTime; }
@@ -177,7 +245,6 @@ namespace WPFWeatherApp.Model
         }
 
         private string weatherText;
-
         public string WeatherText
         {
             get { return weatherText; }
@@ -189,7 +256,6 @@ namespace WPFWeatherApp.Model
         }
 
         private int weatherIcon;
-
         public int WeatherIcon
         {
             get { return weatherIcon; }
@@ -201,7 +267,6 @@ namespace WPFWeatherApp.Model
         }
 
         private bool isDayTime;
-
         public bool IsDayTime
         {
             get { return isDayTime; }
@@ -213,7 +278,6 @@ namespace WPFWeatherApp.Model
         }
 
         private Temperature temperature;
-
         public Temperature Temperature
         {
             get { return temperature; }
@@ -224,7 +288,72 @@ namespace WPFWeatherApp.Model
             }
         }
 
+        private RealFeelTemperature realFeelTemperature;
+        public RealFeelTemperature RealFeelTemperature
+        {
+            get { return realFeelTemperature; }
+            set
+            {
+                realFeelTemperature = value;
+                OnPropertyChanged("RealFeelTemperature");
+            }
+        }
+
+        private Precipitation precipitation;
+
+        public Precipitation Precipitation
+        {
+            get { return precipitation; }
+            set
+            {
+                precipitation = value;
+                OnPropertyChanged("Precipitation");
+            }
+        }
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public AccuWeather()
+        {
+            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
+            {
+                Temperature = new Temperature()
+                {
+                    Imperial = new Imperial()
+                    {
+                        Value = 82,
+                        Unit = "F",
+                        UnitType = 22
+                    }
+                };
+
+                RealFeelTemperature = new RealFeelTemperature()
+                {
+                    Imperial = new Imperial()
+                    {
+                        Value = 100,
+                        Unit = "F",
+                        UnitType = 22
+                    }
+                };
+
+                Precipitation = new Precipitation()
+                {
+                    Imperial = new Imperial()
+                    {
+                        Value = 25,
+                        Unit = "%",
+                        UnitType = 22
+                    }
+                };
+
+
+                WeatherText = "Sunny";
+
+            }
+        }
 
         private void OnPropertyChanged(string propertyName)
         {

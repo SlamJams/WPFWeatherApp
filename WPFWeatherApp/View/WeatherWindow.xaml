@@ -4,25 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFWeatherApp.View"
+        xmlns:vm ="clr-namespace:WPFWeatherApp.ViewModel"
         mc:Ignorable="d"
         Title="WeatherWindow" Height="500" Width="300">
-    <Grid>
-        <StackPanel Margin="10">
+    <Window.Resources>
+        <vm:WeatherVM x:Key="vm" />
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource vm}">
+        <StackPanel Margin="10"
+                    DataContext="{Binding Weather}">
             <TextBox/>
-            <TextBlock Text="Paris"
+            <TextBlock Text="Houston Current Weather"
                        Margin="0 20 0 0"
                        FontSize="20"
                        FontWeight="Bold"/>
-            <TextBlock Text="21 C"
+            <TextBlock Text="{Binding Temperature.Imperial.Value}"
                        Margin="0 30 0 0"
                        FontSize="40"
                        FontWeight="ExtraBold"/>
-            <TextBlock Text="Sunny"
+            <TextBlock Text="{Binding WeatherText}"
                        FontSize="15"
                        FontWeight="Bold"/>
             <TextBlock Text="UV"
                        Margin="0 50 0 0"/>
-            <TextBlock Text="Prec"/>
+            <TextBlock Text="{Binding Precipitation.Imperial.Value}"/>
             <TextBlock Text="NE 9 Kmph"/>
         </StackPanel>
     </Grid>

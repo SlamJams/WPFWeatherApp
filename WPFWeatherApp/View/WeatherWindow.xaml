@@ -14,7 +14,17 @@
     <Grid DataContext="{StaticResource vm}">
         <StackPanel Margin="10"
                     DataContext="{Binding Weather}">
-            <TextBox/>
+            <TextBox Text="{Binding Source={StaticResource vm}, Path=Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <ListView Height="100"
+                ItemsSource="{Binding Source={StaticResource vm}, Path=Cities}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBox Text="{Binding LocalizedName}"/>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+
+            </ListView>
             <TextBlock Text="Houston Current Weather"
                        Margin="0 20 0 0"
                        FontSize="20"

@@ -12,14 +12,14 @@ namespace WPFWeatherApp.ViewModel
     class WeatherAPI
     {
         public const string API_KEY = "pIdABsEBSEAllimmMYA4EtdkxJukxDzB";
-        public const string BASE_URL = "http://dataservice.accuweather.com/currentconditions/v1/351197?apikey={0}";
+        public const string BASE_URL = "http://dataservice.accuweather.com/currentconditions/v1/{0}?apikey={1}";
         public const string BASE_URL_AUTOCOMPLETE = "http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey={0}&q={1}";
 
-        public async Task<AccuWeather> GetWeatherInformationAsync(string cityName)
+        public static async Task<AccuWeather> GetWeatherInformationAsync(string cityKey)
         {
             AccuWeather result = new AccuWeather();
 
-            string url = String.Format(BASE_URL, API_KEY);
+            string url = String.Format(BASE_URL, cityKey ,API_KEY);
 
             using (HttpClient client = new HttpClient())
             {

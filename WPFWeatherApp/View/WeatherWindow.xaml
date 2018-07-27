@@ -16,15 +16,22 @@
                     DataContext="{Binding Weather}">
             <TextBox Text="{Binding Source={StaticResource vm}, Path=Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <ListView Height="100"
-                ItemsSource="{Binding Source={StaticResource vm}, Path=Cities}">
+                      SelectedItem="{Binding Source={StaticResource vm}, Path=SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Source={StaticResource vm}, Path=Cities}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBox Text="{Binding LocalizedName}"/>
+                        <TextBox>
+                            <TextBox.Text>
+                                <MultiBinding StringFormat="{}{0}, {1}">
+                                    <Binding Path="LocalizedName"/>
+                                    <Binding Path="AdministrativeArea.LocalizedName"/>
+                                </MultiBinding>
+                            </TextBox.Text>
+                        </TextBox>
                     </DataTemplate>
-
                 </ListView.ItemTemplate>
-
             </ListView>
+
             <TextBlock Text="Houston Current Weather"
                        Margin="0 20 0 0"
                        FontSize="20"

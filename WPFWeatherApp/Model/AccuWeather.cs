@@ -317,8 +317,6 @@ namespace WPFWeatherApp.Model
 
         public AccuWeather()
         {
-            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
-            {
                 Temperature = new Temperature()
                 {
                     Imperial = new Imperial()
@@ -349,10 +347,7 @@ namespace WPFWeatherApp.Model
                     }
                 };
 
-
                 WeatherText = "Sunny";
-
-            }
         }
 
         private void OnPropertyChanged(string propertyName)

@@ -65,7 +65,10 @@ namespace WPFWeatherApp.Model
 
         public string LocalizedName
         {
-            get { return localizedName; }
+            get
+            {
+                return localizedName;
+            }
             set
             {
                 localizedName = value;
@@ -86,7 +89,7 @@ namespace WPFWeatherApp.Model
             }
         }
 
-
+        
         private AdministrativeArea administrative;
 
         public AdministrativeArea AdministrativeArea
@@ -99,6 +102,36 @@ namespace WPFWeatherApp.Model
             }
         }
 
+
+        private string key;
+
+        public string Key
+        {
+            get { return key; }
+            set
+            {
+                key = value;
+                OnPropertyChanged("Key");
+            }
+        }
+
+
+        public City()
+        {
+            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
+            {
+                localizedName = "LocalName";
+                Country = new Country()
+                {
+                    LocalizedName = "Country_Name"
+                };
+
+                AdministrativeArea = new AdministrativeArea()
+                {
+                    LocalizedName = "Admin_location"
+                };
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

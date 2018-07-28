@@ -32,21 +32,26 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <TextBlock Text="Houston Current Weather"
+            <TextBlock Text="{Binding CityName}"
                        Margin="0 20 0 0"
                        FontSize="20"
                        FontWeight="Bold"/>
-            <TextBlock Text="{Binding Temperature.Imperial.Value}"
-                       Margin="0 30 0 0"
+            <TextBlock Margin="0 30 0 0"
                        FontSize="40"
-                       FontWeight="ExtraBold"/>
+                       FontWeight="ExtraBold">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} {1}">
+                        <Binding Path="Temperature.Imperial.Value"/>
+                        <Binding Path="Temperature.Imperial.Unit"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Text="{Binding RealFeelTemperature.Imperial.Value}"
+                       FontSize="20"
+                       FontWeight="Light"/>
             <TextBlock Text="{Binding WeatherText}"
                        FontSize="15"
                        FontWeight="Bold"/>
-            <TextBlock Text="UV"
-                       Margin="0 50 0 0"/>
-            <TextBlock Text="{Binding Precipitation.Imperial.Value}"/>
-            <TextBlock Text="NE 9 Kmph"/>
         </StackPanel>
     </Grid>
 </Window>

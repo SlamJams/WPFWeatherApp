@@ -11,7 +11,7 @@ namespace WPFWeatherApp.ViewModel
     public class WeatherVM
     {
         public AccuWeather Weather { get; set; }
-        public ObservableCollection<List<City>> Cities { get; set; }
+        public ObservableCollection<City> Cities { get; set; }
         
 
 
@@ -35,7 +35,10 @@ namespace WPFWeatherApp.ViewModel
             set
             {
                 selectedCity = value;
-                GetWeather();
+                if (selectedCity.Key != null)
+                {
+                    GetWeather();
+                }
             }
         }
 
@@ -43,7 +46,7 @@ namespace WPFWeatherApp.ViewModel
         public WeatherVM()
         {
             Weather = new AccuWeather();
-            Cities = new ObservableCollection<List<City>>();
+            Cities = new ObservableCollection<City>();
             SelectedCity = new City();
         }
 
@@ -52,18 +55,22 @@ namespace WPFWeatherApp.ViewModel
             var cities = await WeatherAPI.GetAutoCompleteAsync(Query);
 
             Cities.Clear();
-            
+
+            foreach (var city in cities)
+            {
+                Cities.Add(city);
+            }
 
         }
 
         private async void GetWeather()
         {
             var weather = await WeatherAPI.GetWeatherInformationAsync(SelectedCity.Key);
-            Weather.WeatherText = weather.WeatherText;
-            Weather.Precipitation = weather.Precipitation;
-            Weather.RealFeelTemperature = weather.RealFeelTemperature;
-            Weather.Temperature = weather.Temperature;
-
+            Weather.WeatherText = weather[0].WeatherText;
+            Weather.Precipitation = weather[0].Precipitation;
+            Weather.RealFeelTemperature = weather[0].RealFeelTemperature;
+            Weather.Temperature = weather[0].Temperature;
+            Weather.CityName = selectedCity.LocalizedName;
         }
     }
 }

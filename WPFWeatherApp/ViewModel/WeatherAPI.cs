@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using WPFWeatherApp.Model;
 using Newtonsoft.Json;
 
@@ -15,9 +16,9 @@ namespace WPFWeatherApp.ViewModel
         public const string BASE_URL = "http://dataservice.accuweather.com/currentconditions/v1/{0}?apikey={1}";
         public const string BASE_URL_AUTOCOMPLETE = "http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey={0}&q={1}";
 
-        public static async Task<AccuWeather> GetWeatherInformationAsync(string cityKey)
+        public static async Task<List<AccuWeather>> GetWeatherInformationAsync(string cityKey)
         {
-            AccuWeather result = new AccuWeather();
+            List<AccuWeather> result = new List<AccuWeather>();
 
             string url = String.Format(BASE_URL, cityKey ,API_KEY);
 
@@ -26,7 +27,7 @@ namespace WPFWeatherApp.ViewModel
                 var response = await client.GetAsync(url);
                 string json = await response.Content.ReadAsStringAsync();
 
-                result = JsonConvert.DeserializeObject<AccuWeather>(json);
+                result = JsonConvert.DeserializeObject<List<AccuWeather>>(json);
             }
 
             return result;

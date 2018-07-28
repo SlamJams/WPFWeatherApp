@@ -61,8 +61,8 @@ namespace WPFWeatherApp.Model
 
     public class Imperial : INotifyPropertyChanged
     {
-        private int _value;
-        public int Value
+        private double _value;
+        public double Value
         {
             get
             {
@@ -221,6 +221,19 @@ namespace WPFWeatherApp.Model
 
     public class AccuWeather : INotifyPropertyChanged
     {
+
+        private string cityName;
+
+        public string CityName
+        {
+            get { return cityName; }
+            set
+            {
+                cityName = value;
+                OnPropertyChanged("CityName");
+            }
+        }
+
 
         private DateTime localObservationDateTime;
         public DateTime LocalObservationDateTime
